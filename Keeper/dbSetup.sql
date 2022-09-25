@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS keeps(
   FOREIGN KEY (creatorId) REFERENCES accounts(id)
 )default charset utf8 COMMENT '';
 
+ALTER TABLE keeps
+DROP COLUMN vaultKeepId;
 
 CREATE TABLE IF NOT EXISTS vaultKeeps(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
