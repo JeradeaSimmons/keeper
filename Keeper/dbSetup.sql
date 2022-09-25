@@ -7,6 +7,19 @@ CREATE TABLE IF NOT EXISTS accounts(
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8 COMMENT '';
 
+
+CREATE TABLE IF NOT EXISTS profiles(
+  profileId VARCHAR(255) NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+
+
+  FOREIGN KEY (profileId) REFERENCES accounts(id)
+) default charset utf8 COMMENT '';
+
+DROP
+TABLE profiles;
+
 CREATE TABLE IF NOT EXISTS keeps(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',

@@ -48,15 +48,32 @@ namespace Keeper.Repositories
       }, new {vaultId}).ToList();
       return keeps;
     }
+  internal VaultKeep GetOne(int id)
+    {
+      string sql = @"
+      SELECT
+      vk.*,
+      a.*
+      FROM vaultKeeps vk
+      JOIN accounts a ON vk.creatorId = a.id
+      WHERE vk.Id = @id;
+      ";
+      return _db.Query<VaultKeep, Account, VaultKeep>(sql, (vk, account) =>
+      {
+        return vk;
+      }, new {id}).FirstOrDefault();
+    }
+
+
 
     internal void Delete(int id)
     {
       string sql = @"
       DELETE FROM vaultKeeps WHERE id = @id;
       ";
-      _db.Execute(sql, new {id});
+      _db.Execute(sql, new { id });
     }
 
-    
+  
   }
 }

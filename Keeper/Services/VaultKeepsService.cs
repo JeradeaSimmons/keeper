@@ -27,10 +27,10 @@ namespace Keeper.Services
       return _vaultKeepsRepo.GetKeepsByVaultId(vaultId);
     }
 
-    internal string Delete(int id, string userId)
+    internal string Delete(int id, Account user)
     {
       VaultKeep original = GetOne(id);
-      if (original.CreatorId != userId)
+      if (original.CreatorId != user.Id)
       {
         throw new Exception("Can't Delete, Not Yours");
       }
@@ -40,7 +40,14 @@ namespace Keeper.Services
 
     private VaultKeep GetOne(int id)
     {
-      throw new NotImplementedException();
+      VaultKeep vaultKeep = _vaultKeepsRepo.GetOne(id);
+      if (vaultKeep == null)
+      {
+        throw new Exception("NOTHING THERE");
+      }
+      return vaultKeep;
     }
+
+  
   }
 }
