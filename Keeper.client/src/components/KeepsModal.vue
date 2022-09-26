@@ -11,7 +11,7 @@
         
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body d-flex justify-content-evenly bg-secondary text-white">
+      <div class="modal-body d-flex justify-content-evenly text-dark">
         <div class="col-md-6"> <img class="img-fluid modalImg" :src="keep.img" alt=""> </div>
         <div class="col-md-6">
           <h3>{{keep.name}}</h3>

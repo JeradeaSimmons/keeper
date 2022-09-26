@@ -1,9 +1,10 @@
 <template>
-  <div class="row justify-content-evenly mt-3">
-    <div class="col-sm-5 col-md-2 m-2 text-center" v-for="k in keeps" :key="k.id">
+  <div class="masonry">
+    <div class="text-center" v-for="k in keeps" :key="k.id">
       <KeepCard :keep="k" />
     </div>
   </div>
+    
 
 
 
@@ -49,4 +50,27 @@ components: {KeepCard},
 }
 </script>
 <style lang="scss" scoped>
+
+.masonry {
+  columns: 6 200px;
+  column-gap: 1rem;
+  div {
+    width: 150px;
+    background: #EC985A;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
+  } 
+}
+
+
+
+
+
+
 </style>

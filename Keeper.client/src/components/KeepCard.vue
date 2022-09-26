@@ -4,8 +4,8 @@
   <div data-bs-toggle="modal" data-bs-target="#KeepsModal">
     <img class="img-fluid cardImg selectable" :src="keep.img" alt="" @click="setActive()">
   </div>
-  <div class="p-2">
-    <h3 class="d-flex justify-content-between">{{keep.name}}
+  <div class="">
+    <h3 class="d-flex justify-content-between text-white">{{keep.name}}
       <router-link class="" :to="{ name: 'Profile' }">
         <div class="">
           <img class="rounded-4 selectable" height="35" :src="keep.creator.picture" alt="">
@@ -58,6 +58,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-
+.cardImg{
+  object-fit: fill;
+}
 
 </style>
