@@ -30,10 +30,10 @@ namespace Keeper.Services
       {
         throw new Exception("no keep with that id");
       }
-      if(keep.CreatorId != userId)
-      {
-        throw new Exception("Not your Keep");
-      }
+      // if(keep.CreatorId != userId)
+      // {
+      //   throw new Exception("Not your Keep");
+      // }
       return keep;
     }
 

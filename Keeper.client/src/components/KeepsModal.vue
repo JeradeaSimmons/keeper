@@ -1,0 +1,60 @@
+<template>
+
+<div class="modal fade" id="KeepsModal" tabindex="-1" aria-labelledby="KeepsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary text-white">
+        
+          <h5><i class="icon mdi mdi-eye"></i>{{keep.views}}</h5>
+          <h5><i class="icon mdi mdi-bank"></i>{{keep.kept}}</h5>
+          
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex justify-content-evenly bg-secondary text-white">
+        <div class="col-md-6"> <img class="img-fluid modalImg" :src="keep.img" alt=""> </div>
+        <div class="col-md-6">
+          <h3>{{keep.name}}</h3>
+          <p>{{keep.description}}</p>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between bg-secondary text-white">
+        <button type="button" class="btn btn-dark text-white">Add to My Vault</button>
+        <h4><i class="icon mdi mdi-trash-can selectable"></i></h4>
+        <h5>
+          <router-link class="" :to="{ name: 'Profile' }">
+        <img class="selectable" data-bs-dismiss="modal" height="35" :src="keep.creator?.picture" alt="">
+          {{keep.creator?.name}}
+      </router-link>
+          
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</template>
+<script>
+import { AppState } from '../AppState';
+import { computed } from "@vue/reactivity";
+
+export default {
+setup() {
+  return {
+
+    keep: computed(()=> AppState.activeKeep)
+  };
+},
+};
+</script>
+<style lang="scss" scoped>
+
+.modalImg{
+  height: 400px;
+  width: 600px;
+  image-rendering: auto;
+}
+
+</style>

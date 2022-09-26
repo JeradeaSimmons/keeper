@@ -1,36 +1,52 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="row justify-content-evenly mt-3">
+    <div class="col-sm-5 col-md-2 m-2 text-center" v-for="k in keeps" :key="k.id">
+      <KeepCard :keep="k" />
     </div>
   </div>
+
+
+
+
+
 </template>
-
 <script>
-export default {
-  name: 'Home'
-}
-</script>
+import { computed } from "@vue/reactivity";
+import { onMounted } from "vue";
+import { AppState } from "../AppState";
+import { keepsService } from "../services/KeepsService";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import KeepCard from "../components/KeepCard.vue";
 
-<style scoped lang="scss">
-.home{
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card{
-    width: 50vw;
-    > img{
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
+
+
+export default {
+
+setup() {
+
+
+async function getKeeps(){
+  try {
+    await keepsService.getKeeps();
+  } catch (error) {
+    logger.error(error)
+    Pop.toast(error.message, 'error')
   }
 }
+
+onMounted(()=> {
+  getKeeps();
+});
+  return {
+keeps: computed(()=> AppState.keeps),
+
+
+  };
+},
+components: {KeepCard},
+
+}
+</script>
+<style lang="scss" scoped>
 </style>
