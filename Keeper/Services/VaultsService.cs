@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Keeper.Models;
 using Keeper.Repositories;
 
@@ -7,10 +8,12 @@ namespace Keeper.Services
   public class VaultsService
     {
         private readonly VaultsRepository _vaultsRepo;
+        private readonly AccountsRepository _repo;
 
-        public VaultsService(VaultsRepository vaultsRepo)
+        public VaultsService(VaultsRepository vaultsRepo, AccountsRepository repo)
         {
             _vaultsRepo = vaultsRepo;
+            _repo = repo;
         }
 
     internal Vault Create(Vault newVault)
@@ -58,5 +61,29 @@ namespace Keeper.Services
       _vaultsRepo.Delete(id);
       return "Vault Deleted";
     }
+
+    internal List<Vault> GetMyVaults(string id)
+    {
+     
+     Profile profile = GetOne(id);
+      return _vaultsRepo.GetMyVaults(id);
+    }
+
+    internal List<Vault> GetProfileVaults(string id)
+    {
+      Profile profile = GetOne(id);
+      return _vaultsRepo.GetProfileVaults(id);
+    }
+
+private Profile GetOne(string userId)
+    {
+       Profile profile = _repo.GetOne(userId);
+      if(profile == null)
+      {
+        throw   new Exception("NO PROFILE");
+      }
+      return profile;
+    }
+
   }
 }

@@ -98,3 +98,14 @@ k.*,
 a.*
 FROM keeps k
 JOIN accounts a ON a.id = k.creatorId;
+
+
+
+
+
+  SELECT
+      k.*,
+      a.*
+      FROM keeps k
+      JOIN accounts a ON k.creatorId = a.id
+      WHERE a.id = @creatorId;

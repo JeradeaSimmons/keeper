@@ -1,14 +1,17 @@
+using System;
 using Keeper.Models;
 using Keeper.Repositories;
 
 namespace Keeper.Services
 {
-    public class AccountService
+  public class AccountService
     {
         private readonly AccountsRepository _repo;
-        public AccountService(AccountsRepository repo)
+        private readonly KeepsRepository _keepsRepo;
+        public AccountService(AccountsRepository repo, KeepsRepository keepsRepo)
         {
             _repo = repo;
+            _keepsRepo = keepsRepo;
         }
 
         internal string GetProfileEmailById(string id)
@@ -29,7 +32,19 @@ namespace Keeper.Services
             return profile;
         }
 
-        internal Account Edit(Account editData, string userEmail)
+    internal Profile GetOne(string id)
+    {
+      Profile profile = _repo.GetOne(id);
+      if(profile == null)
+      {
+        throw   new Exception("NO PROFILE");
+      }
+      return profile;
+    }
+
+    
+
+    internal Account Edit(Account editData, string userEmail)
         {
             Account original = GetProfileByEmail(userEmail);
             original.Name = editData.Name.Length > 0 ? editData.Name : original.Name;

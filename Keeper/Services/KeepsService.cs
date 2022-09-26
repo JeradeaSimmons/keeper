@@ -8,9 +8,11 @@ namespace Keeper.Services
   public class KeepsService
     {
         private readonly KeepsRepository _keepsRepo;
-        public KeepsService(KeepsRepository keepsRepo)
+        private readonly AccountsRepository _repo;
+        public KeepsService(KeepsRepository keepsRepo, AccountsRepository repo)
         {
             _keepsRepo = keepsRepo;
+            _repo = repo;
         }
 
     internal List<Keep> GetAll()
@@ -49,6 +51,22 @@ namespace Keeper.Services
       original.Description = update.Description ?? original.Description;
 
       return _keepsRepo.Update(original);
+    }
+
+      internal List<Keep> GetProfileKeeps(string id)
+    {
+      Profile profile = GetOne(id);
+      return _keepsRepo.GetProfileKeeps(id);
+    }
+
+    private Profile GetOne(string userId)
+    {
+       Profile profile = _repo.GetOne(userId);
+      if(profile == null)
+      {
+        throw   new Exception("NO PROFILE");
+      }
+      return profile;
     }
 
     internal string Delete(int id, Account user)

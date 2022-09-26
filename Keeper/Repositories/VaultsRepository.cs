@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
@@ -64,6 +65,42 @@ namespace Keeper.Repositories
       DELETE FROM vaults WHERE id = @id;
       ";
       _db.Execute(sql, new { id });
+    }
+
+    internal List<Vault> GetProfileVaults(string creatorId)
+    {
+        string sql = @"
+      SELECT
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a ON v.creatorId = a.id
+      WHERE v.creatorId = @creatorId;
+      
+    ";
+      return _db.Query<Vault, Profile, Vault>(sql, (v, p)=>
+      {
+        v.Creator = p;
+        return v;
+      }, new {creatorId}).ToList();
+    }
+
+    internal List<Vault> GetMyVaults(string creatorId)
+    {
+       string sql = @"
+      SELECT
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a ON v.creatorId = a.id
+      WHERE v.creatorId = @creatorId;
+      
+    ";
+      return _db.Query<Vault, Profile, Vault>(sql, (v, p)=>
+      {
+        v.Creator = p;
+        return v;
+      }, new {creatorId}).ToList();
     }
   }
 }

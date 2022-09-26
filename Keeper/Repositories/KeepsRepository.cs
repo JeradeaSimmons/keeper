@@ -62,6 +62,27 @@ namespace Keeper.Repositories
       return newKeep;
     }
 
+    internal List<Keep> GetProfileKeeps(string creatorId)
+    {
+      string sql = @"
+      SELECT
+      k.*,
+      a.*
+      FROM keeps k
+      JOIN accounts a ON k.creatorId = a.id
+      WHERE k.creatorId = @creatorId;
+      
+    ";
+      return _db.Query<Keep, Profile, Keep>(sql, (k, p)=>
+      {
+        k.Creator = p;
+        return k;
+      }, new {creatorId}).ToList();
+     
+    }
+
+   
+
     internal Keep Update(Keep update)
     {
       string sql = @"
