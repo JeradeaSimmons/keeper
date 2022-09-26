@@ -6,7 +6,7 @@
   </div>
   <div class="">
     <h3 class="d-flex justify-content-between text-white">{{keep.name}}
-      <router-link class="" :to="{ name: 'Profile' }">
+      <router-link class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
         <div class="">
           <img class="rounded-4 selectable" height="35" :src="keep.creator.picture" alt="">
         </div>
@@ -28,7 +28,9 @@
 
 </template>
 <script>
+import { computed } from "@vue/reactivity";
 import { Modal } from "bootstrap";
+import { AppState } from "../AppState";
 import { keepsService } from "../services/KeepsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
@@ -50,7 +52,8 @@ export default {
               logger.error(error)
               Pop.toast(error.message, 'error')
             }
-          }
+          },
+          profile: computed(()=> AppState.profile)
         };
     },
     components: { KeepsModal }
