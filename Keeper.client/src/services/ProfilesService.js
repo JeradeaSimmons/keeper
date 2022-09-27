@@ -8,7 +8,7 @@ class ProfilesService {
 async getProfile(id){
   try {
     const res = await api.get(`api/profiles/${id}`)
-    AppState.profile = res.data
+    AppState.currentProfile = res.data
   } catch (error) {
     logger.error(error)
     Pop.toast(error.message, 'error')

@@ -6,7 +6,7 @@
   </div>
   <div class="">
     <h3 class="d-flex justify-content-between text-white">{{keep.name}}
-      <router-link class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
+      <router-link :to="{name: 'Profile', params: {id:keep.creatorId}}">
         <div class="">
           <img class="rounded-4 selectable" height="35" :src="keep.creator.picture" alt="">
         </div>
@@ -44,6 +44,8 @@ export default {
     },
     setup(props) {
         return {
+
+
           async setActive(){
             try {
               Modal.getOrCreateInstance(document.getElementById("KeepsModal")).toggle();
@@ -53,7 +55,7 @@ export default {
               Pop.toast(error.message, 'error')
             }
           },
-          profile: computed(()=> AppState.profile)
+         
         };
     },
     components: { KeepsModal }

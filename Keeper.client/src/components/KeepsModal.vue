@@ -22,7 +22,7 @@
         <button type="button" class="btn btn-dark text-white">Add to My Vault</button>
         <h4><i class="icon mdi mdi-trash-can selectable"></i></h4>
         <h5>
-          <router-link class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
+          <router-link v-if="keep.creatorId" class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
         <img class="selectable" data-bs-dismiss="modal" height="35" :src="keep.creator?.picture" alt="">
           {{keep.creator?.name}}
       </router-link>
