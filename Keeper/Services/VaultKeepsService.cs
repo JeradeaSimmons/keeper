@@ -22,7 +22,7 @@ namespace Keeper.Services
     internal VaultKeep Create(VaultKeep newVaultKeep)
     {
     //  Vault vault = _vaultsRepo.GetOne(id);
-    // if (newVaultKeep.Creator.Id != vault.CreatorId)
+    // if (vault.CreatorId != newVaultKeep.Creator.Id)
     // {
     //   throw new Exception("Not your vault to keep in");
     // }
