@@ -8,4 +8,7 @@ export const AppState = reactive({
   keeps: {},
   activeKeep: {},
   currentProfile: {},
+  profileKeeps: {},
+  profileVaults: {},
+  vaultKeeps: {},
 })
