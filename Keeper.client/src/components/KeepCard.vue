@@ -1,18 +1,19 @@
 <template>
 
-<div class="rounded elevation-4 d-flex justify-content-between card bg-secondary">
+<div class="rounded elevation-4 d-flex align-items-end mainImg">
+  
   <div data-bs-toggle="modal" data-bs-target="#KeepsModal">
-    <img class="img-fluid cardImg selectable" :src="keep.img" alt="" @click="setActive()">
+    <img class="img-fluid selectable opacity-75" :src="keep.img" alt="" @click="setActive()">
   </div>
-  <div class="">
-    <h3 class="d-flex justify-content-between text-white">{{keep.name}}
+  
+    <h3 class="text-white nameImg elevation-4">{{keep.name}}
       <router-link :to="{name: 'Profile', params: {id:keep.creatorId}}">
-        <div class="">
-          <img class="rounded-4 selectable" height="35" :src="keep.creator.picture" alt="">
-        </div>
+      
+          <img class="rounded-4 selectable" height="45" :src="keep.creator.picture" alt="">
+       
       </router-link>
     </h3>
-  </div>
+  
 
 </div>
   
@@ -63,8 +64,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-.cardImg{
-  object-fit: fill;
+.mainImg{
+  position: relative;
+}
+
+.nameImg{
+  position: absolute;
 }
 
 </style>

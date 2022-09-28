@@ -1,8 +1,8 @@
 <template>
-  <header class="mb-3">
+  <header class="mb-5">
     <Navbar />
   </header>
-  <main class="container-fluid mt-2">
+  <main class="container-fluid">
     <router-view />
   </main>
   <footer>

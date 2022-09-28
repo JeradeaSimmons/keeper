@@ -1,21 +1,21 @@
 <template>
-  <div  v-for="k in keep">
+  
   <div class="row mb-5 d-flex justify-content-between">
     <div class="col-md-4">
-      <h3>SOON TO BE VAULT NAME</h3>
-    <h4>KEEPS:{{keep.length}}</h4>
+      <h3>{{vault?.name}}</h3>
+    <h4>KEEPS:{{keep?.length}}</h4>
     </div>
     <div class="col-md-2">
       <button class="btn btn-secondary text-light rounded">DELETE VAULT</button>
     </div>
   </div>
-  <div class="row">
+  <div class="row" v-for="k in keep">
     <div class="col-md-4">
-      <img height="75" :src="k.img" alt="">
-      <h2>{{k.name}}</h2></div>
+      <img height="75" :src="k?.img" alt="">
+      <h2>{{k?.name}}</h2></div>
    
   </div>
-  </div>
+  
 </template>
 <script>
 import { computed } from "@vue/reactivity";
@@ -38,12 +38,26 @@ async function getKeepsByVaultId(){
     Pop.toast(error.message, 'error')
   }}
 
+  async function setActive(){
+  
+  try {
+    await vaultsService.getOne(route.params.id)
+  } catch (error) {
+    logger.error(error)
+    Pop.toast(error.message, 'error')
+  }
+}
+
 onMounted(()=> {
   getKeepsByVaultId()
+  setActive()
 })
 
   return {
 keep: computed(()=> AppState.vaultKeeps),
+vault: computed(()=> AppState.activeVault)
+
+
 
   };
 },

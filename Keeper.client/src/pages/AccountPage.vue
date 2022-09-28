@@ -2,7 +2,7 @@
 
   <div class="row pb-5 mt-3">
     <div class="col-md-2 offset-1">
-      <img height="150" :src="account.picture" alt="">
+      <img height="150" class="rounded" :src="account.picture" alt="">
     </div>
     <div class="col-md-3">
       <h2>{{account.name}}</h2>
@@ -21,16 +21,16 @@
   </VaultForm>
 </div>
 
-<div class="col-3" v-for="v in vault">
+<div class="col-3 mainImg d-flex align-items-end" v-for="v in vault">
   <router-link :to="{name: 'Vault', params: {id: v?.id}}">
-    <img class="m-1" height="75" :src="v.img" alt="">
+    <img class="m-1" :src="v.img" alt="">
   </router-link>
-  <h4>{{v.name}}</h4>
+  <h4 class="nameImg text-white">{{v.name}}</h4>
 </div>
 
 
 </div>
-  <div class="row mt-4">
+  <div class="row mt-4 mb-4">
   <div class="col-3">
     <h3>KEEPS:</h3>
     <KeepForm>
@@ -40,8 +40,9 @@
     </KeepForm>
   </div>
 
-  <div class="col-3" v-for="k in keep">
-    <img class="m-1" height="75" :src="k.img" alt="">
+  <div class="col-3 mainImg d-flex align-items-end " v-for="k in keep">
+    <img class="m-1" :src="k.img" alt="">
+    <h4 class="nameImg text-white">{{k.name}}</h4>
   </div>
 
 </div>
@@ -95,5 +96,14 @@ onMounted(()=> {
 <style scoped>
 img {
   max-width: 100px;
+}
+
+.mainImg{
+  position: relative;
+  
+}
+
+.nameImg{
+  position: absolute;
 }
 </style>

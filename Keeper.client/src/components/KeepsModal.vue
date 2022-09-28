@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="modal-footer justify-content-between bg-secondary text-white">
-        <button type="button" class="btn btn-dark text-white">Add to My Vault</button>
+        <button type="button" class="btn btn-dark text-white" @click="vaultKeepKept()" >Add to My Vault</button>
         <h4><i class="icon mdi mdi-trash-can selectable"></i></h4>
         <h5>
           <router-link v-if="keep.creatorId" class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
@@ -39,12 +39,29 @@
 <script>
 import { AppState } from '../AppState';
 import { computed } from "@vue/reactivity";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { vaultsService } from "../services/VaultsService";
 
 export default {
 setup() {
   return {
 
-    keep: computed(()=> AppState.activeKeep)
+    keep: computed(()=> AppState.activeKeep),
+    user: computed(()=> AppState.account),
+
+async vaultKeepKept(){
+  try {
+    let newKeptKeep = {keepId: AppState.activeKeep.id}
+    
+    await vaultsService.vaultKeepKept(newKeptKeep)
+    Pop.success('Keep Vaulted')
+  } catch (error) {
+    logger.error(error)
+    Pop.toast(error.message, 'error')
+  }
+}
+
   };
 },
 };
