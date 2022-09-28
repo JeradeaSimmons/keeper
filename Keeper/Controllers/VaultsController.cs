@@ -29,8 +29,7 @@ namespace Keeper.Controllers
         {
             try 
             {
-              Account user = await HttpContext.
-              GetUserInfoAsync<Account>();
+              Account user = await HttpContext.GetUserInfoAsync<Account>();
               newVault.CreatorId = user.Id;
               Vault vault = _vaultsService.Create(newVault);
               vault.Creator = user;
@@ -43,6 +42,7 @@ namespace Keeper.Controllers
         }
 
         [HttpGet("{id}")]
+        
         public async Task<ActionResult<Vault>> GetOne(int id)
         {
             try 
@@ -58,11 +58,14 @@ namespace Keeper.Controllers
         }
 
         [HttpGet("{id}/keeps")]
-        public ActionResult<List<VaultKeepViewModel>> GetKeeps(int id)
+        
+        public async Task<ActionResult<List<VaultKeepViewModel>>> GetKeeps(int id)
         {
+        
           try 
           {
-            List<VaultKeepViewModel> keeps = _vaultKeepsService.GetKeepsByVaultId(id);
+             Account user = await HttpContext.GetUserInfoAsync<Account>();
+            List<VaultKeepViewModel> keeps = _vaultKeepsService.GetKeepsByVaultId(id, user?.Id);
             return Ok(keeps);
           }
           catch (Exception e)

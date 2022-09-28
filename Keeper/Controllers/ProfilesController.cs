@@ -59,7 +59,7 @@ namespace Keeper.Controllers
             try 
             {
               Account user = await HttpContext.GetUserInfoAsync<Account>();
-              List<Vault> vaults = _vaultsService.GetProfileVaults( id);
+              List<Vault> vaults = _vaultsService.GetProfileVaults(id);
               return Ok(vaults);
             }
             catch (Exception e)

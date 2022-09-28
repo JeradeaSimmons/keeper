@@ -109,3 +109,32 @@ JOIN accounts a ON a.id = k.creatorId;
       FROM keeps k
       JOIN accounts a ON k.creatorId = a.id
       WHERE a.id = @creatorId;
+
+
+
+       SELECT
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a ON v.creatorId = a.id
+      WHERE v.creatorId = '632de323b9fe8bd9e1aa5a18'
+      && v.isPrivate = 0;
+      
+      
+   
+
+     SELECT
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a ON v.creatorId = a.id
+      WHERE a.id = @userId;
+
+       SELECT
+      vk.*,
+      k.*,
+      a.*
+      FROM vaultKeeps vk
+      JOIN keeps k ON vk.keepId = k.id
+      JOIN accounts a ON k.creatorId = a.id
+      WHERE vk.vaultId = '102';

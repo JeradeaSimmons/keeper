@@ -29,13 +29,14 @@ namespace Keeper.Services
         throw new Exception("no vault with that id");
 
       }
-      if (vault.CreatorId != userId)
+      if (vault.IsPrivate == true && userId != vault.CreatorId)
       {
-        throw new Exception("Not Your Vault");
+        throw new Exception("Vault is Private");
       }
       return vault;
     }
 
+ 
     internal Vault Update(Vault update, Account user)
     {
       Vault original = GetOne(update.Id, user.Id);
@@ -51,6 +52,8 @@ namespace Keeper.Services
 
     }
 
+   
+
     internal string Delete(int id, Account user)
     {
       Vault original = GetOne(id, user.Id);
@@ -62,16 +65,17 @@ namespace Keeper.Services
       return "Vault Deleted";
     }
 
-    internal List<Vault> GetMyVaults(string id)
+    internal List<Vault> GetMyVaults(string userId)
     {
      
-     Profile profile = GetOne(id);
-      return _vaultsRepo.GetMyVaults(id);
+  
+      return _vaultsRepo.GetMyVaults(userId);
     }
 
     internal List<Vault> GetProfileVaults(string id)
     {
       Profile profile = GetOne(id);
+    
       return _vaultsRepo.GetProfileVaults(id);
     }
 

@@ -37,7 +37,8 @@ namespace Keeper.Repositories
         a.*
     FROM vaults v
     JOIN accounts a ON v.creatorId = a.id
-    WHERE v.id = @id;
+    WHERE v.id = @id
+    ;
       ";
       return _db.Query<Vault, Profile, Vault>(sql, (vault, profile)=>
       {
@@ -75,7 +76,9 @@ namespace Keeper.Repositories
       a.*
       FROM vaults v
       JOIN accounts a ON v.creatorId = a.id
-      WHERE v.creatorId = @creatorId;
+      WHERE v.creatorId = @creatorId
+      && v.isPrivate = 0;
+      
       
     ";
       return _db.Query<Vault, Profile, Vault>(sql, (v, p)=>
@@ -85,7 +88,7 @@ namespace Keeper.Repositories
       }, new {creatorId}).ToList();
     }
 
-    internal List<Vault> GetMyVaults(string creatorId)
+    internal List<Vault> GetMyVaults(string userId)
     {
        string sql = @"
       SELECT
@@ -93,14 +96,14 @@ namespace Keeper.Repositories
       a.*
       FROM vaults v
       JOIN accounts a ON v.creatorId = a.id
-      WHERE v.creatorId = @creatorId;
+      WHERE a.id = @userId;
       
     ";
-      return _db.Query<Vault, Profile, Vault>(sql, (v, p)=>
+      return _db.Query<Vault, Account, Vault>(sql, (v, a)=>
       {
-        v.Creator = p;
+        v.Creator = a;
         return v;
-      }, new {creatorId}).ToList();
+      }, new {userId}).ToList();
     }
   }
 }

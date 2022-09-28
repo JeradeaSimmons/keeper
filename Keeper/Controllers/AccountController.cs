@@ -37,13 +37,13 @@ namespace Keeper.Controllers
             }
         }
 
-    [HttpGet("/vaults")]
-    public async Task<ActionResult<List<Vault>>> GetMyVaults(string id)
+    [HttpGet("vaults")]
+    public async Task<ActionResult<List<Vault>>> GetMyVaults()
     {
       try
       {
         Account user = await HttpContext.GetUserInfoAsync<Account>();
-        List<Vault> vaults = _vaultsService.GetMyVaults(id);
+        List<Vault> vaults = _vaultsService.GetMyVaults(user.Id);
         return Ok(vaults);
       }
       catch (Exception e)
