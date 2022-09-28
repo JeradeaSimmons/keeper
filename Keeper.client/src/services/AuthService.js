@@ -27,6 +27,9 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here
+  // TODO go and get all the data that belongs to the user logged in
+  // TODO api/account/vaults
+  // TODO api/profiles/appstate.account.id/keeps
 })
 
 async function refreshAuthToken(config) {

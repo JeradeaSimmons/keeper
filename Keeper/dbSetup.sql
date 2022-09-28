@@ -65,6 +65,9 @@ CREATE TABLE IF NOT EXISTS vaults(
 
 )default charset utf8 COMMENT '';
 
+ALTER TABLE vaults
+ADD COLUMN isPrivate BOOLEAN DEFAULT false;
+
 
 INSERT INTO vaults
 (name, img, description, creatorId)
