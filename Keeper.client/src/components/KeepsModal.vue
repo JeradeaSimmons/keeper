@@ -5,10 +5,10 @@
     <div class="modal-content">
       <div class="modal-header bg-secondary text-white">
         
-          <h5><i class="icon mdi mdi-eye"></i>{{keep.views}}</h5>
+          <h5><i class="icon mdi mdi-eye"></i>{{keep.views}}--</h5>
           <h5><i class="icon mdi mdi-bank"></i>{{keep.kept}}</h5>
-          
         
+
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body d-flex justify-content-evenly text-dark">
@@ -20,23 +20,24 @@
       </div>
       <div class="modal-footer justify-content-between bg-secondary text-white">
         <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Add to My Vault
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Add to My Vault
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
         <!-- <button type="button" class="btn btn-dark text-white" @click="vaultKeepKept()" >Add to My Vault</button> -->
         <h4><i @click="deleteKeep()" class="icon mdi mdi-trash-can selectable"></i></h4>
         <h5>
           <router-link v-if="keep.creatorId" class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
-        <img class="selectable" data-bs-dismiss="modal" height="35" :src="keep.creator?.picture" alt="">
-          {{keep.creator?.name}}
-      </router-link>
-          
+            <img class="selectable" data-bs-dismiss="modal" height="35" :src="keep.creator?.picture" alt="">
+            {{keep.creator?.name}}
+          </router-link>
+
         </h5>
       </div>
     </div>

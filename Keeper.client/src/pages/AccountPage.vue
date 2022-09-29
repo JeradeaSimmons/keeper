@@ -20,16 +20,17 @@
     </template>
   </VaultForm>
 </div>
-
-<div class="col-3 mainImg d-flex align-items-end" v-for="v in vault">
+</div>
+<div class="col-3" v-for="v in vault" :key="v.id">
   <router-link :to="{name: 'Vault', params: {id: v?.id}}">
-    <img class="m-1" :src="v.img" alt="">
+    <!-- <img class="m-1" :src="v.img" alt=""> -->
+    <VaultCard :vault="v"/>
   </router-link>
-  <h4 class="nameImg text-white">{{v.name}}</h4>
+  
 </div>
 
 
-</div>
+
   <div class="row mt-4 mb-4">
   <div class="col-3">
     <h3>KEEPS:</h3>
@@ -39,13 +40,14 @@
       </template>
     </KeepForm>
   </div>
-
-  <div class="col-3 mainImg d-flex align-items-end " v-for="k in keep">
-    <img class="m-1" :src="k.img" alt="">
-    <h4 class="nameImg text-white">{{k.name}}</h4>
+</div>
+  <div class="col-3 mainImg d-flex align-items-end " v-for="k in keep" :key="k.id">
+    <!-- <img class="m-1" :src="k.img" alt="">
+    <h4 class="nameImg text-white">{{k.name}}</h4> -->
+    <KeepCard :keep="k"/>
   </div>
 
-</div>
+
 </template>
 
 <script>
@@ -57,6 +59,7 @@ import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import VaultForm from '../components/VaultForm.vue';
 import KeepForm from '../components/KeepForm.vue';
+import KeepCard from "../components/KeepCard.vue";
 export default {
   name: 'Account',
   setup() {
@@ -91,7 +94,7 @@ onMounted(()=> {
     keep: computed(()=> AppState.keeps),
     }
   },
-  components: {VaultForm, KeepForm}
+  components: { VaultForm, KeepForm, KeepCard }
 }
 </script>
 
