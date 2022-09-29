@@ -9,7 +9,7 @@
     <h3 class="text-white nameImg elevation-4">{{keep.name}}
       <router-link :to="{name: 'Profile', params: {id:keep.creatorId}}">
       
-          <img class="rounded-4 selectable" height="45" :src="keep.creator.picture" alt="">
+          <img class="rounded-4 selectable" height="45" :src="keep.creator?.picture" alt="">
        
       </router-link>
     </h3>

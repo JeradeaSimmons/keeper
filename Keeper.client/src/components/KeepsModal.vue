@@ -20,22 +20,24 @@
       </div>
       <div class="modal-footer justify-content-between bg-secondary text-white">
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Add to My Vault
           </button>
-          <ul class="dropdown-menu" v-for="m in myVaults">
-            <li><a class="dropdown-item" href="#" @click="vaultKeepKept(m.id)">{{m.name}}</a></li>
-            <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+          <ul class="dropdown-menu">
+            <li v-for="m in myVaults"><a class="dropdown-item" href="#" @click="vaultKeepKept(m.id)" data-bs-dismiss="modal">{{m.name}}</a></li>
+            <!-- <li><a class="dropdown-item" href="#">{{m.name}}</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li> -->
           </ul>
         </div>
         <!-- <button type="button" class="btn btn-dark text-white" @click="vaultKeepKept()" >Add to My Vault</button> -->
-        <h4><i @click="deleteKeep()" class="icon mdi mdi-trash-can selectable"></i></h4>
+        <h4><i @click="deleteKeep()" class="icon mdi mdi-trash-can selectable" data-bs-dismiss="modal"></i></h4>
         <h5>
           <router-link v-if="keep.creatorId" class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
-            <img class="selectable" data-bs-dismiss="modal" height="35" :src="keep.creator?.picture" alt="">
+            <div data-bs-dismiss="modal">
+            <img class="selectable" height="35" :src="keep.creator?.picture" alt="">
             {{keep.creator?.name}}
+          </div>
           </router-link>
 
         </h5>
