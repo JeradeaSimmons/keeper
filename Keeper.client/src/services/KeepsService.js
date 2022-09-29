@@ -31,5 +31,14 @@ class KeepsService {
     AppState.keeps.push(res.data)
   }
 
+  async delete(id){
+    const res = await api.delete('/api/keeps/' + id)
+    AppState.keeps = AppState.keeps.filter(k => k.id != id)
+  }
+  async vaultKeepsDelete(id){
+    const res = await api.delete('/api/vaultKeeps/' + id)
+    AppState.keeps = AppState.keeps.filter(k => k.id != id)
+  }
+
 }
 export const keepsService = new KeepsService()

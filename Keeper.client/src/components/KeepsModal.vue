@@ -20,7 +20,7 @@
       </div>
       <div class="modal-footer justify-content-between bg-secondary text-white">
         <button type="button" class="btn btn-dark text-white" @click="vaultKeepKept()" >Add to My Vault</button>
-        <h4><i class="icon mdi mdi-trash-can selectable"></i></h4>
+        <h4><i @click="deleteKeep()" class="icon mdi mdi-trash-can selectable"></i></h4>
         <h5>
           <router-link v-if="keep.creatorId" class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">
         <img class="selectable" data-bs-dismiss="modal" height="35" :src="keep.creator?.picture" alt="">
@@ -42,6 +42,7 @@ import { computed } from "@vue/reactivity";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { vaultsService } from "../services/VaultsService";
+import { keepsService } from "../services/KeepsService";
 
 export default {
 setup() {
@@ -56,6 +57,16 @@ async vaultKeepKept(){
     
     await vaultsService.vaultKeepKept(newKeptKeep)
     Pop.success('Keep Vaulted')
+  } catch (error) {
+    logger.error(error)
+    Pop.toast(error.message, 'error')
+  }
+},
+
+async deleteKeep(){
+  try {
+    await keepsService.delete(AppState.activeKeep.id)
+    Pop.toast('KEEP DELETED')
   } catch (error) {
     logger.error(error)
     Pop.toast(error.message, 'error')

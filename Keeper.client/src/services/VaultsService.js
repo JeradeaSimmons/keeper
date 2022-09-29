@@ -38,9 +38,15 @@ class VaultsService{
 
   async vaultKeepKept(newKeptKeep){
     const res = await api.post('/api/vaultKeeps', newKeptKeep)
-    logger.log('VAULTKEEEPKEPT', res.data)
+    logger.log('VAULT KEEP KEPT', res.data)
     AppState.vaultKeeps.push(res.data)
   }
+
+  async delete(id){
+    const res = await api.delete('/api/vaults/' + id)
+    AppState.vault = AppState.vault.filter(v => v.id != id)
+  }
+
 
 }
 
