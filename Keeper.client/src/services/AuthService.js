@@ -2,9 +2,12 @@ import { initialize } from '@bcwdev/auth0provider-client'
 import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../env'
 import { router } from '../router'
+import { logger } from "../utils/Logger"
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
 import { socketService } from './SocketService'
+import { vaultsService } from "./VaultsService"
+import { keepsService } from "./KeepsService"
 
 export const AuthService = initialize({
   domain,
@@ -30,6 +33,18 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   // TODO go and get all the data that belongs to the user logged in
   // TODO api/account/vaults
   // TODO api/profiles/appstate.account.id/keeps
+   
+
+
+   await vaultsService.getMyVaults()
+   await keepsService.getMyKeeps(AppState.account.id)
+    
+
+
+
+
+
+  
 })
 
 async function refreshAuthToken(config) {

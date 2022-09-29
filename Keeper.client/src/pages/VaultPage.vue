@@ -9,11 +9,12 @@
       <button class="btn btn-secondary text-light rounded" @click="deleteVault()">DELETE VAULT</button>
     </div>
   </div>
-  <div class="row" v-for="k in keep">
-    <div class="col-md-4">
-      <img height="75" :src="k?.img" alt="">
+  <div class="row" v-for="k in keep" :key="k.id">
+    <div class="col-md-2">
+      <!-- <img height="75" :src="k?.img" alt="">
       <h2>{{k?.name}}</h2>
-      <button @click="deleteVaultKeep()" class="btn" title="DELETE KEEP">❌</button>
+      <button @click="deleteVaultKeep()" class="btn" title="DELETE KEEP">❌</button> -->
+      <KeepCard :keep="k"/>
    </div>
   </div>
   
@@ -23,6 +24,7 @@ import { computed } from "@vue/reactivity";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { AppState } from "../AppState";
+import { router } from "../router";
 import { keepsService } from "../services/KeepsService";
 import { vaultsService } from "../services/VaultsService";
 import { logger } from "../utils/Logger";
@@ -45,9 +47,11 @@ async function getKeepsByVaultId(){
   try {
     await vaultsService.getOne(route.params.id)
   } catch (error) {
+    Pop.toast(error.message, 'NO ACCESS')
+    router.push({name: 'Home'})
     // TODO when catching an error....do the thing..if you catch an error from this request, the user should not be able to access the page
-    logger.error(error)
-    Pop.toast(error.message, 'error')
+    // logger.error(error)
+    
   }
 }
 

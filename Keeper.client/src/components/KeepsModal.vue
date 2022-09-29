@@ -24,10 +24,10 @@
             aria-expanded="false">
             Add to My Vault
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <ul class="dropdown-menu" v-for="m in myVaults">
+            <li><a class="dropdown-item" href="#" @click="vaultKeepKept(m.id)">{{m.name}}</a></li>
+            <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
           </ul>
         </div>
         <!-- <button type="button" class="btn btn-dark text-white" @click="vaultKeepKept()" >Add to My Vault</button> -->
@@ -58,15 +58,18 @@ import { keepsService } from "../services/KeepsService";
 export default {
 setup() {
   return {
-
+myVaults: computed(()=> AppState.myVaults),
     keep: computed(()=> AppState.activeKeep),
     user: computed(()=> AppState.account),
 
-async vaultKeepKept(){
+async vaultKeepKept(id){
   try {
-    let newKeptKeep = {keepId: AppState.activeKeep.id}
+    let newKeptKeep = {keepId: AppState.activeKeep.id, vaultId: id }
+    
+    
     
     await vaultsService.vaultKeepKept(newKeptKeep)
+    this.keep.kept++
     Pop.success('Keep Vaulted')
   } catch (error) {
     logger.error(error)

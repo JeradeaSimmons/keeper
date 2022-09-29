@@ -29,7 +29,7 @@
           <textarea v-model="editable.description" class="form-control" name="vault-description" id="vault-description" rows="3"></textarea>
         </div>
         <div class="col-12">
-          <button class="btn btn-secondary" title="submit form">Create <i class="mdi mdi-plus"></i></button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal" title="submit form">Create <i class="mdi mdi-plus"></i></button>
         </div>
       </form>
     </template>

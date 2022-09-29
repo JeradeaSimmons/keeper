@@ -21,13 +21,14 @@
   </VaultForm>
 </div>
 </div>
-<div class="col-3" v-for="v in vault" :key="v.id">
+<div class="row"><div class="col-3 m-3" v-for="v in vault" :key="v.id">
   <router-link :to="{name: 'Vault', params: {id: v?.id}}">
     <!-- <img class="m-1" :src="v.img" alt=""> -->
     <VaultCard :vault="v"/>
   </router-link>
   
-</div>
+</div></div>
+
 
 
 
@@ -41,11 +42,14 @@
     </KeepForm>
   </div>
 </div>
-  <div class="col-3 mainImg d-flex align-items-end " v-for="k in keep" :key="k.id">
+<div class="row">
+   <div class="col-3 mainImg d-flex align-items-end m-3" v-for="k in keep" :key="k.id">
     <!-- <img class="m-1" :src="k.img" alt="">
     <h4 class="nameImg text-white">{{k.name}}</h4> -->
     <KeepCard :keep="k"/>
   </div>
+</div>
+ 
 
 
 </template>
@@ -65,33 +69,33 @@ export default {
   setup() {
 
 
-    async function getKeepsByProfile(){
-  try {
+  //   async function getKeepsByProfile(){
+  // try {
 
-      await keepsService.getKeepsByProfile(AppState.account.id);
+  //     await keepsService.getKeepsByProfile(AppState.account.id);
   
-  } catch (error) {
-    logger.error(error)
-    Pop.toast(error.message, 'error')
-  }}
+  // } catch (error) {
+  //   logger.error(error)
+  //   Pop.toast(error.message, 'error')
+  // }}
 
-  async function getMyVaults(){
-  try {
-    await vaultsService.getMyVaults();
-  } catch (error) {
-    logger.error(error)
-    Pop.toast(error.message, 'error')
-  }
+//   async function getMyVaults(){
+//   try {
+//     await vaultsService.getMyVaults();
+//   } catch (error) {
+//     logger.error(error)
+//     Pop.toast(error.message, 'error')
+//   }
 
-}
+// }
 onMounted(()=> {
-  getKeepsByProfile()
-  getMyVaults()
+  // getKeepsByProfile()
+  // getMyVaults()
 })
     return {
       account: computed(() => AppState.account),
       vault: computed(()=> AppState.myVaults),
-    keep: computed(()=> AppState.keeps),
+    keep: computed(()=> AppState.myKeeps),
     }
   },
   components: { VaultForm, KeepForm, KeepCard }
