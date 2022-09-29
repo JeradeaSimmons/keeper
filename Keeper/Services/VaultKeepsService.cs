@@ -11,34 +11,40 @@ namespace Keeper.Services
         private readonly VaultsService _vaultsService;
         private readonly KeepsService _keepsService;
         private readonly VaultsRepository _vaultsRepo;
-        public VaultKeepsService(VaultKeepsRepository vaultKeepsRepository, VaultsService vaultsService, KeepsService keepsService, VaultsRepository vaultsRepo)
+        private readonly KeepsRepository _keepsRepo;
+        public VaultKeepsService(VaultKeepsRepository vaultKeepsRepository, VaultsService vaultsService, KeepsService keepsService, VaultsRepository vaultsRepo, KeepsRepository keepsRepo)
         {
             _vaultKeepsRepo = vaultKeepsRepository;
             _vaultsService = vaultsService;
             _keepsService = keepsService;
             _vaultsRepo = vaultsRepo;
+            _keepsRepo = keepsRepo;
         }
 
     internal VaultKeep Create(VaultKeep newVaultKeep)
     {
-    //  Vault vault = _vaultsRepo.GetOne(id);
-    // if (vault.CreatorId != newVaultKeep.Creator.Id)
-    // {
-    //   throw new Exception("Not your vault to keep in");
-    // }
+     Vault vault = _vaultsRepo.GetOne(newVaultKeep.vaultId);
+    if (vault.CreatorId != newVaultKeep.CreatorId)
+    {
+      throw new Exception("Not your vault to keep in");
+    }
+      
+      // TODO whenever I create a vaultkeep....I should increment the keep count for THAT keep
+      // find the keep by the vaultKeep.keepId...use your repo function NOT the keeps service
+      // 'update' the foundkeep and increase it's kept count
+      Keep keep = _keepsRepo.GetOne(newVaultKeep.keepId);
+      keep.Kept++;
+      _keepsRepo.Update(keep);
       return _vaultKeepsRepo.Create(newVaultKeep);
     }
 
     internal List<VaultKeepViewModel> GetKeepsByVaultId(int id, string userId)
     {
     Vault vault = _vaultsRepo.GetOne(id);
-      // List <VaultKeepViewModel> keeps =_vaultKeepsRepo.GetKeepsByVaultId(id);
-      
       if (vault.IsPrivate == true && vault.CreatorId != userId)
       {
         throw new Exception("Vault is Private");
       }
-
    return _vaultKeepsRepo.GetKeepsByVaultId(id);
     }
 

@@ -64,7 +64,9 @@ export default {
 
     async function getKeepsByProfile(){
   try {
-    await keepsService.getKeepsByProfile(AppState.account.id);
+
+      await keepsService.getKeepsByProfile(AppState.account.id);
+  
   } catch (error) {
     logger.error(error)
     Pop.toast(error.message, 'error')

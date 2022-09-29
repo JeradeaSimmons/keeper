@@ -19,7 +19,17 @@
         </div>
       </div>
       <div class="modal-footer justify-content-between bg-secondary text-white">
-        <button type="button" class="btn btn-dark text-white" @click="vaultKeepKept()" >Add to My Vault</button>
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to My Vault
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+        <!-- <button type="button" class="btn btn-dark text-white" @click="vaultKeepKept()" >Add to My Vault</button> -->
         <h4><i @click="deleteKeep()" class="icon mdi mdi-trash-can selectable"></i></h4>
         <h5>
           <router-link v-if="keep.creatorId" class="" :to="{ name: 'Profile', params: {id: keep.creatorId}}">

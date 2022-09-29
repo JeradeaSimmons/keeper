@@ -36,8 +36,8 @@ namespace Keeper.Services
       // {
       //   throw new Exception("Not your Keep");
       // }
-      // keep.Views++;
-      // _keepsRepo.Update(keep);
+      keep.Views++;
+      _keepsRepo.Update(keep);
       return keep;
     }
 

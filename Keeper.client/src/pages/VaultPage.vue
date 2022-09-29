@@ -45,6 +45,7 @@ async function getKeepsByVaultId(){
   try {
     await vaultsService.getOne(route.params.id)
   } catch (error) {
+    // TODO when catching an error....do the thing..if you catch an error from this request, the user should not be able to access the page
     logger.error(error)
     Pop.toast(error.message, 'error')
   }

@@ -17,6 +17,9 @@ namespace Keeper.Repositories
 
     internal List<Keep> GetAll()
     {
+      // TODO return the 'count' for how many times keeps have been kept
+      // return a count of how many times each keep appears in the vault keep table
+      // refer to the restaurants repository in helpReviews for how to achieve this
        string sql = @"
       SELECT
       k.*,
@@ -33,6 +36,9 @@ namespace Keeper.Repositories
 
     internal Keep GetOne(int id)
     {
+      // TODO return the 'count' for how many times keeps have been kept
+      // return a count of how many times each keep appears in the vault keep table
+      // refer to the restaurants repository in helpReviews for how to achieve this
       string sql = @"
        SELECT
         k.*,
@@ -89,7 +95,9 @@ namespace Keeper.Repositories
        UPDATE keeps SET
         name = @name,
         img = @img,
-        description = @description
+        description = @description,
+        views = @views,
+        kept = @kept
         Where id = @id;
       ";
       _db.Execute(sql, update);
