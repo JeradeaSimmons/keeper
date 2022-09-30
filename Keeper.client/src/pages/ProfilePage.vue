@@ -24,7 +24,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-3 m-3" v-for="v in vault" :key="v.id">
+  <div class="col-md-3 m-3 masonry" v-for="v in vault" :key="v.id">
     <router-link :to="{name: 'Vault', params: {id: v?.id}}">
       <!-- <img class="m-1" height="75" :src="v.img" alt=""> -->
       <VaultCard :vault="v"/>
@@ -42,7 +42,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-3 m-2" v-for="k in keep" :key="k.id">
+  <div class="col-3 m-2 masonry" v-for="k in keep" :key="k.id">
     <!-- <img class="m-1" height="75" :src="k.img" alt=""> -->
     <KeepCard :keep="k"/>
   </div>
@@ -118,6 +118,23 @@ export default {
 <style lang="scss" scoped>
 .allImg{
   height: 150px;
+}
+
+.masonry {
+  columns: 6 200px;
+  column-gap: 1rem;
+  div {
+    width: 150px;
+    background: #EC985A;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
+  } 
 }
 
 </style>

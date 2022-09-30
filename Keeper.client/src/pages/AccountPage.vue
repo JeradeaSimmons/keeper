@@ -21,7 +21,7 @@
   </VaultForm>
 </div>
 </div>
-<div class="row"><div class="col-3 m-3" v-for="v in vault" :key="v.id">
+<div class="row"><div class="col-3 m-3 masonry" v-for="v in vault" :key="v.id">
   <router-link :to="{name: 'Vault', params: {id: v?.id}}">
     <!-- <img class="m-1" :src="v.img" alt=""> -->
     <VaultCard :vault="v"/>
@@ -43,7 +43,7 @@
   </div>
 </div>
 <div class="row">
-   <div class="col-3 mainImg d-flex align-items-end m-3" v-for="k in keep" :key="k.id">
+   <div class="col-3 mainImg d-flex masonry align-items-end m-3" v-for="k in keep" :key="k.id">
     <!-- <img class="m-1" :src="k.img" alt="">
     <h4 class="nameImg text-white">{{k.name}}</h4> -->
     <KeepCard :keep="k"/>
@@ -102,7 +102,7 @@ onMounted(()=> {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 img {
   max-width: 100px;
 }
@@ -112,7 +112,26 @@ img {
   
 }
 
+.masonry {
+  columns: 6 200px;
+  column-gap: 1rem;
+  div {
+    width: 150px;
+    background: #EC985A;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
+  } 
+}
+
 .nameImg{
   position: absolute;
 }
+
+
 </style>

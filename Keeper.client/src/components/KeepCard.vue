@@ -1,6 +1,6 @@
 <template>
 
-<div class="rounded elevation-4 d-flex align-items-end mainImg">
+<div class="rounded elevation-4 d-flex align-items-end mainImg bg-dark">
   
   <div data-bs-toggle="modal" data-bs-target="#KeepsModal">
     <img class="img-fluid selectable opacity-75" :src="keep.img" alt="" @click="setActive()">

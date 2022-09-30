@@ -1,7 +1,7 @@
 <template>
 
   <div class="row mb-5 d-flex justify-content-between">
-    <div class="col-md-4">
+    <div class="col-md-4 masonry">
       <h3>{{vault?.name}}</h3>
       <h4>KEEPS:{{keep?.length}}</h4>
     </div>
@@ -94,5 +94,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
+.masonry {
+  columns: 6 200px;
+  column-gap: 1rem;
+  div {
+    width: 150px;
+    background: #EC985A;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
+  } 
+}
 </style>
