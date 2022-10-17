@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS keeps(
   shares INT NOT NULL DEFAULT 0,
   
 
-  FOREIGN KEY (creatorId) REFERENCES accounts(id)
+  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 )default charset utf8 COMMENT '';
 
 ALTER TABLE keeps
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS vaults(
   description VARCHAR(255) NOT NULL,
   isPrivate BOOLEAN NOT NULL DEFAULT false,
 
-  FOREIGN KEY (creatorId) REFERENCES accounts(id)
+  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 
 )default charset utf8 COMMENT '';
 
