@@ -7,6 +7,8 @@ using CodeWorks.Auth0Provider;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
+// STUDY THIS UP GET BACK TO FAMILIAR WITH IT!
 namespace Keeper.Controllers
 {
     [ApiController]
